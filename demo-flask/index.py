@@ -87,7 +87,7 @@ def index():
             session['samlUserdata'] = { "name" : [auth.get_nameid()]}
             for key, val in auth.get_attributes().items():
               session['samlUserdata'][key] = val
-              
+
             self_url = OneLogin_Saml2_Utils.get_self_url(req)
             if 'RelayState' in request.form and self_url != request.form['RelayState']:
                 return redirect(auth.redirect_to(request.form['RelayState']))
@@ -155,4 +155,4 @@ def metadata():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8000, debug=True)
+    app.run(host='0.0.0.0', port=8001, debug=True)
