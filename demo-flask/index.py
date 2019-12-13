@@ -84,6 +84,10 @@ def index():
             session['samlNameIdNameQualifier'] = auth.get_nameid_nq()
             session['samlNameIdSPNameQualifier'] = auth.get_nameid_spnq()
             session['samlSessionIndex'] = auth.get_session_index()
+            session['samlUserdata'] = { "name" : [auth.get_nameid()]}
+            for key, val in auth.get_attributes().items():
+              session['samlUserdata'][key] = val
+              
             self_url = OneLogin_Saml2_Utils.get_self_url(req)
             if 'RelayState' in request.form and self_url != request.form['RelayState']:
                 return redirect(auth.redirect_to(request.form['RelayState']))
